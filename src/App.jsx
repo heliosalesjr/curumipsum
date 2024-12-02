@@ -1,8 +1,8 @@
-import React from 'react'
+import Hero from './components/Hero'
 
 function App() {
   return (
-    <h1 className='p-24 m-24 bg-slate-100 font-black text-center text-3xl'>Curum Ipsum</h1>
+    <Hero />
   )
 }
 
