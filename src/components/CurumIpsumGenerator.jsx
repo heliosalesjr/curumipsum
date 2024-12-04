@@ -8,7 +8,7 @@ const CurumIpsumGenerator = () => {
   const [inputValue, setInputValue] = useState(1); // Número inserido
   const [type, setType] = useState("paragraphs"); // Tipo selecionado
   const [, copyToClipboard] = useCopyToClipboard(); // Apenas a função
-
+  
   // Carregar JSON ao montar o componente
   useEffect(() => {
     fetch("/curumData.json")
@@ -20,25 +20,35 @@ const CurumIpsumGenerator = () => {
   // Função para gerar o texto com base na entrada do usuário
   const handleGenerate = () => {
     if (!data) return;
-
+  
     let generatedText = "";
-
+  
+    const getContent = (items, count) => {
+      let result = [];
+      while (result.length < count) {
+        const shuffled = [...items].sort(() => Math.random() - 0.5); // Embaralha os itens
+        result = [...result, ...shuffled];
+      }
+      return result.slice(0, count);
+    };
+  
     switch (type) {
       case "paragraphs":
-        generatedText = data.paragraphs.slice(0, inputValue).join("\n\n");
+        generatedText = getContent(data.paragraphs, inputValue).join("\n\n");
         break;
       case "sentences":
-        generatedText = data.sentences.slice(0, inputValue).join(" ");
+        generatedText = getContent(data.sentences, inputValue).join(" ");
         break;
       case "words":
-        generatedText = data.words.slice(0, inputValue).join(" ");
+        generatedText = getContent(data.words, inputValue).join(" ");
         break;
       default:
         generatedText = "Invalid selection.";
     }
-
+  
     setOutput(generatedText || "No content available.");
   };
+  
 
   return (
     <section className="bg-slate-50 text-slate-800 p-8 max-w-5xl mx-auto">
