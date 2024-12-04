@@ -1,0 +1,18 @@
+{
+    "data": {
+      "words": ["Kurum", "Ipsum", "Pindorama", "Arandé", "Tupã", "Maíra", "Jurema", "Caeté", "Igarapé"],
+      "sentences": [
+        "Curum ipsum dolor sit amet, tupini conamet seluréia.",
+        "Taciti maguaré purus caetés ornare jurema.",
+        "Quisque ajuricaba purus fringilla curupira ultricies.",
+        "Ut jandira camu-camu viverra volutpat, curum sagittis tapajós ornare.",
+        "Pindorama purus bibendum et caeté fringilla, tupini per turpis urna."
+      ],
+      "paragraphs": [
+        "Curum ipsum dolor sit amet, tupini conamet seluréia, consectetur arandé adipiscing elit. Taciti maguaré purus caetés ornare jurema. Nascetur sapien tapere morbi.",
+        "Ut jandira camu-camu viverra volutpat, curum sagittis tapajós ornare. Taciti in maíra iara hendrerit, tempor curiango pulvinar sapien.",
+        "Pindorama purus bibendum et caeté fringilla, tupini per turpis urna. Mauris tekoá suscipit niarapé curum."
+      ]
+    }
+  }
+  
