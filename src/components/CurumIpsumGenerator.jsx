@@ -1,27 +1,43 @@
 import { useState, useEffect } from "react";
 import { FaCopy } from "react-icons/fa";
-import { useCopyToClipboard } from "react-use";
+import useCopyToClipboard from "react-use/lib/useCopyToClipboard";
 
 const CurumIpsumGenerator = () => {
-  const [data, setData] = useState(null);
-  const [inputValue, setInputValue] = useState(1);
-  const [type, setType] = useState("paragraphs");
-  const [output, setOutput] = useState("");
-  const [copied, copyToClipboard] = useCopyToClipboard();
+  const [data, setData] = useState(null); // Dados do JSON
+  const [output, setOutput] = useState(""); // Texto gerado
+  const [inputValue, setInputValue] = useState(1); // Número inserido
+  const [type, setType] = useState("paragraphs"); // Tipo selecionado
+  const [, copyToClipboard] = useCopyToClipboard(); // Apenas a função
 
+  // Carregar JSON ao montar o componente
   useEffect(() => {
-    // Fetch the JSON data
     fetch("/curumData.json")
       .then((response) => response.json())
-      .then((json) => setData(json.data))
+      .then((jsonData) => setData(jsonData.data))
       .catch((error) => console.error("Error loading JSON:", error));
   }, []);
 
-  const generateContent = () => {
+  // Função para gerar o texto com base na entrada do usuário
+  const handleGenerate = () => {
     if (!data) return;
-    const contentArray = data[type];
-    const result = contentArray.slice(0, inputValue).join(type === "words" ? " " : "\n\n");
-    setOutput(result);
+
+    let generatedText = "";
+
+    switch (type) {
+      case "paragraphs":
+        generatedText = data.paragraphs.slice(0, inputValue).join("\n\n");
+        break;
+      case "sentences":
+        generatedText = data.sentences.slice(0, inputValue).join(" ");
+        break;
+      case "words":
+        generatedText = data.words.slice(0, inputValue).join(" ");
+        break;
+      default:
+        generatedText = "Invalid selection.";
+    }
+
+    setOutput(generatedText || "No content available.");
   };
 
   return (
@@ -56,7 +72,7 @@ const CurumIpsumGenerator = () => {
 
         {/* Generate Button */}
         <button
-          onClick={generateContent}
+          onClick={handleGenerate}
           className="px-4 py-2 bg-green-600 text-white font-bold rounded hover:bg-green-500"
         >
           Generate
@@ -69,18 +85,17 @@ const CurumIpsumGenerator = () => {
             className="flex items-center gap-2 px-4 py-2 bg-slate-200 text-slate-800 border border-slate-300 rounded hover:bg-slate-300"
           >
             <FaCopy />
-            {copied ? "Copied!" : "Copy"}
+            Copy
           </button>
         </div>
       </div>
 
       {/* Output Box */}
       <div className="p-4 border border-slate-300 rounded-3xl bg-white">
-        <p className="text-slate-700 whitespace-pre-line">{output}</p>
+        <p className="text-slate-700 whitespace-pre-wrap">{output}</p>
       </div>
     </section>
   );
 };
 
 export default CurumIpsumGenerator;
-
