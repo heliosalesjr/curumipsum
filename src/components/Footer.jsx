@@ -1,9 +1,9 @@
 const Footer = () => {
     return (
-      <footer className="bg-green-600 text-white py-4">
+      <footer className="bg-green-600 text-white py-4 pt-8">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between px-4">
           {/* Project Name and Year */}
-          <div className="text-lg font-bold">
+          <div className="text-lg font-ultra">
             Curum Ipsum © {new Date().getFullYear()}
           </div>
           {/* Creator Information */}
