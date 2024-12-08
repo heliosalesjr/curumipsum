@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
+.font-ultra {
+  font-family: 'Ultra', sans-serif;
+}
 body {
     background-color: #F8FAFC;
 }
